@@ -14,5 +14,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    setupFiles: ['node_modules/fake-indexeddb/auto.js'],
   },
-})
+} as any)
