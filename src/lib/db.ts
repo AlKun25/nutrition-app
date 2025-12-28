@@ -1,5 +1,18 @@
-// Polyfill IndexedDB for test environments (must be before Dexie import)
-import 'fake-indexeddb/auto'
+// Ensure fake-indexeddb is loaded in test environments before db instance creation
+// test-setup.ts also imports it, but this ensures it's available when db.ts executes
+// Type declaration for require (used in test environments)
+declare const require: (id: string) => any
+
+if (typeof globalThis !== 'undefined' && !globalThis.indexedDB) {
+  // Only load if indexedDB doesn't exist (test environment)
+  // Use require for test environments (available in Node.js/test environments)
+  try {
+    // @ts-ignore - require is available in test environments
+    require('fake-indexeddb/auto')
+  } catch {
+    // Ignore - test-setup.ts should handle it via vite.config.ts setupFiles
+  }
+}
 
 import Dexie, { type EntityTable } from 'dexie'
 import type {
@@ -10,15 +23,19 @@ import type {
   GroceryList
 } from '@/types'
 
-// For tests: explicitly pass fake-indexeddb if available
+// Configure Dexie to use the appropriate IndexedDB implementation
+// - In tests: fake-indexeddb (loaded above or via test-setup.ts)
+// - In browser: native IndexedDB
 let dexieOptions: any = {}
 
 if (typeof globalThis !== 'undefined' && 'indexedDB' in globalThis) {
-  const fakeIndexedDB = globalThis.indexedDB
-  const fakeIDBKeyRange = globalThis.IDBKeyRange
-  // Accept both real IndexedDB (IDBFactory) and fake-indexeddb (FDBFactory)
-  if (fakeIndexedDB && (fakeIndexedDB.constructor?.name === 'IDBFactory' || fakeIndexedDB.constructor?.name === 'FDBFactory')) {
-    dexieOptions = { indexedDB: fakeIndexedDB, IDBKeyRange: fakeIDBKeyRange }
+  const indexedDB = globalThis.indexedDB
+  const IDBKeyRange = globalThis.IDBKeyRange
+  
+  // Always pass indexedDB if available - Dexie will use what's provided
+  // In tests: fake-indexeddb, In browser: native IndexedDB
+  if (indexedDB && IDBKeyRange) {
+    dexieOptions = { indexedDB, IDBKeyRange }
   }
 }
 
@@ -51,10 +68,17 @@ export const db = new NutritionDB()
 // Initialize database with persistent storage request
 export async function initializeDatabase(): Promise<boolean> {
   try {
-    // Request persistent storage to prevent eviction
+    // Request persistent storage to prevent eviction (optional)
+    // Note: This may return false in development (localhost) or if user denies permission
+    // Data will still be stored, but may be evicted under storage pressure
     if (navigator.storage && navigator.storage.persist) {
       const isPersisted = await navigator.storage.persist()
-      console.log(`IndexedDB storage persisted: ${isPersisted}`)
+      if (isPersisted) {
+        console.log('✓ IndexedDB storage is persistent (protected from eviction)')
+      } else {
+        // Not critical - data is still stored, just not guaranteed to persist under storage pressure
+        console.debug('IndexedDB storage is not persistent (this is normal for localhost)')
+      }
     }
 
     // Check storage quota
