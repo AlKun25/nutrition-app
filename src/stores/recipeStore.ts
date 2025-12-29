@@ -4,7 +4,7 @@ import type { RecipeCategory } from '@/types'
 type SortBy = 'name' | 'calories' | 'protein' | 'created'
 type SortOrder = 'asc' | 'desc'
 
-interface RecipeState {
+interface RecipeFilterState {
   searchQuery: string
   selectedCategory: RecipeCategory | 'all'
   selectedTags: string[]
@@ -12,17 +12,18 @@ interface RecipeState {
   sortOrder: SortOrder
 }
 
-interface RecipeActions {
+interface RecipeFilterActions {
   setSearchQuery: (query: string) => void
   setCategory: (category: RecipeCategory | 'all') => void
   toggleTag: (tag: string) => void
+  clearTags: () => void
   setSort: (sortBy: SortBy, order: SortOrder) => void
   clearFilters: () => void
 }
 
-type RecipeStore = RecipeState & RecipeActions
+type RecipeStore = RecipeFilterState & RecipeFilterActions
 
-const initialState: RecipeState = {
+const initialState: RecipeFilterState = {
   searchQuery: '',
   selectedCategory: 'all',
   selectedTags: [],
@@ -33,31 +34,19 @@ const initialState: RecipeState = {
 export const useRecipeStore = create<RecipeStore>((set) => ({
   ...initialState,
 
-  setSearchQuery: (query) => {
-    set({ searchQuery: query })
-  },
+  setSearchQuery: (query) => set({ searchQuery: query }),
 
-  setCategory: (category) => {
-    set({ selectedCategory: category })
-  },
+  setCategory: (category) => set({ selectedCategory: category }),
 
-  toggleTag: (tag) => {
-    set((state) => {
-      const isSelected = state.selectedTags.includes(tag)
-      return {
-        selectedTags: isSelected
-          ? state.selectedTags.filter((t) => t !== tag)
-          : [...state.selectedTags, tag],
-      }
-    })
-  },
+  toggleTag: (tag) => set((state) => ({
+    selectedTags: state.selectedTags.includes(tag)
+      ? state.selectedTags.filter((t) => t !== tag)
+      : [...state.selectedTags, tag]
+  })),
 
-  setSort: (sortBy, order) => {
-    set({ sortBy, sortOrder: order })
-  },
+  clearTags: () => set({ selectedTags: [] }),
 
-  clearFilters: () => {
-    set(initialState)
-  },
+  setSort: (sortBy, sortOrder) => set({ sortBy, sortOrder }),
+
+  clearFilters: () => set(initialState),
 }))
-

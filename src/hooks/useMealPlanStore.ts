@@ -1,5 +1,6 @@
 import { useMealPlanStore } from '@/stores/mealPlanStore'
-import type { MealPlan, DayPlan } from '@/types'
+import type { MealPlan } from '@/types'
+// import type { DayPlan } from '@/types'
 
 /**
  * Hook to get the current meal plan
