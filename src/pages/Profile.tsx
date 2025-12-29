@@ -1,9 +1,12 @@
 export default function Profile() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Profile</h1>
-      <p className="text-muted-foreground">Manage your profile and goals</p>
+    <div style={{ padding: '24px 16px' }}>
+      <h1 style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.01em', color: 'hsl(60 4% 17%)' }}>
+        Profile
+      </h1>
+      <p style={{ marginTop: '8px', fontSize: '14px', color: 'hsl(50 3% 37%)' }}>
+        Manage your profile and goals
+      </p>
     </div>
   )
 }
-

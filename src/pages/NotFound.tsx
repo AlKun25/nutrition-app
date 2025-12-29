@@ -1,15 +1,32 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
 
 export default function NotFound() {
   return (
-    <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold mb-4">404</h1>
-      <p className="text-muted-foreground mb-8">Page not found</p>
-      <Button asChild>
-        <Link to="/">Go to Dashboard</Link>
-      </Button>
+    <div 
+      style={{ 
+        padding: '24px 16px', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        minHeight: '60vh',
+        textAlign: 'center',
+      }}
+    >
+      <h1 style={{ fontSize: '48px', fontWeight: 700, color: 'hsl(60 4% 17%)' }}>404</h1>
+      <p style={{ marginTop: '8px', fontSize: '14px', color: 'hsl(50 3% 37%)' }}>
+        Page not found
+      </p>
+      <Link 
+        to="/" 
+        style={{ 
+          marginTop: '24px', 
+          color: 'hsl(120 14% 54%)', 
+          textDecoration: 'none',
+        }}
+      >
+        Go to Dashboard
+      </Link>
     </div>
   )
 }
-

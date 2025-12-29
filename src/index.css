@@ -1,188 +1,335 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/* ============================================
+   NUTRITION APP BRAND SYSTEM
+   Paper-inspired, minimalist design language
+   ============================================ */
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    /* === BACKGROUND COLORS (Paper Tones) === */
+    --background: 39 33% 99%;        /* #fdfcf8 - Warm white (aged paper) */
+    --foreground: 60 4% 17%;         /* #2d2d2a - Almost black */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    /* === CARD/SURFACE COLORS === */
+    --card: 0 0% 100%;               /* #ffffff - Pure white (elevated) */
+    --card-foreground: 60 4% 17%;    /* #2d2d2a */
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 60 4% 17%;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+    /* === PRIMARY (Sage Green - Health/Growth) === */
+    --primary: 120 14% 54%;          /* #7a9b7a */
+    --primary-foreground: 0 0% 100%;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+    /* === SECONDARY (Terracotta - Energy/Warmth) === */
+    --secondary: 20 51% 63%;         /* #d4906f */
+    --secondary-foreground: 0 0% 100%;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+    /* === MUTED (Subtle backgrounds) === */
+    --muted: 43 25% 91%;             /* #edeae0 - Light tan */
+    --muted-foreground: 50 3% 37%;   /* #5f5f57 - Warm gray */
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+    /* === ACCENT (Dusty Blue - Trust/Data) === */
+    --accent: 206 24% 54%;           /* #6b8fa8 */
+    --accent-foreground: 0 0% 100%;
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+    /* === DESTRUCTIVE (Error states) === */
+    --destructive: 0 36% 61%;        /* #c77070 */
+    --destructive-foreground: 0 0% 100%;
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+    /* === BORDERS & INPUTS === */
+    --border: 43 18% 86%;            /* #e3e1d6 */
+    --input: 43 18% 86%;
+    --ring: 120 14% 54%;             /* Same as primary */
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+    /* === RADIUS === */
+    --radius: 0.5rem;
+
+    /* === CHART COLORS (Nutrition themed) === */
+    --chart-1: 120 14% 54%;          /* Sage - Protein */
+    --chart-2: 20 51% 63%;           /* Terracotta - Carbs */
+    --chart-3: 206 24% 54%;          /* Blue - Fat */
+    --chart-4: 45 80% 60%;           /* Gold - Calories */
+    --chart-5: 340 50% 65%;          /* Rose - Goals */
+
+    /* === SIDEBAR (if needed) === */
+    --sidebar: 39 33% 97%;           /* Slightly darker paper */
+    --sidebar-foreground: 60 4% 17%;
+    --sidebar-primary: 120 14% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 43 25% 91%;
+    --sidebar-accent-foreground: 60 4% 17%;
+    --sidebar-border: 43 18% 86%;
+    --sidebar-ring: 120 14% 54%;
+
+    /* === CUSTOM BRAND TOKENS === */
+    --brand-paper: 39 33% 99%;
+    --brand-cream: 40 25% 95%;
+    --brand-tan: 43 25% 91%;
+    --brand-sage: 120 14% 54%;
+    --brand-sage-light: 120 20% 94%;
+    --brand-terracotta: 20 51% 63%;
+    --brand-terracotta-light: 20 40% 95%;
+    --brand-blue: 206 24% 54%;
+    --brand-blue-light: 206 30% 94%;
+
+    /* === SEMANTIC COLORS === */
+    --success: 120 20% 52%;
+    --success-light: 120 30% 94%;
+    --success-border: 120 25% 80%;
+    --warning: 35 50% 57%;
+    --warning-light: 40 50% 95%;
+    --warning-border: 40 40% 80%;
+    --error: 0 36% 61%;
+    --error-light: 0 40% 95%;
+    --error-border: 0 30% 80%;
+    --info: 206 24% 54%;
+    --info-light: 206 30% 94%;
+    --info-border: 206 25% 80%;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+    /* Dark mode - keeping paper metaphor with darker tones */
+    --background: 40 10% 10%;
+    --foreground: 40 20% 90%;
+    --card: 40 10% 14%;
+    --card-foreground: 40 20% 90%;
+    --popover: 40 10% 14%;
+    --popover-foreground: 40 20% 90%;
+    --primary: 120 20% 60%;
+    --primary-foreground: 40 10% 10%;
+    --secondary: 20 40% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 40 10% 20%;
+    --muted-foreground: 40 10% 65%;
+    --accent: 206 30% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 50% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 10% 20%;
+    --input: 40 10% 20%;
+    --ring: 120 20% 60%;
 }
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: hsl(var(--border));
   }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    @apply antialiased;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Remove default body centering from Vite template */
+  #root {
+    min-height: 100vh;
+    width: 100%;
   }
 }
+
+/* ============================================
+   TYPOGRAPHY SCALE
+   ============================================ */
+
+@layer base {
+  h1 {
+    @apply text-2xl font-semibold tracking-tight;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    @apply text-xl font-semibold;
+    letter-spacing: -0.005em;
+  }
+
+  h3 {
+    @apply text-base font-semibold;
+  }
+
+  p {
+    @apply text-sm leading-relaxed;
+  }
+}
+
+/* ============================================
+   CUSTOM UTILITIES
+   ============================================ */
+
+@layer utilities {
+  /* Soft shadows (paper-inspired depth) */
+  .shadow-soft {
+    box-shadow: 0 1px 2px hsl(60 4% 17% / 0.04);
+  }
+  
+  .shadow-soft-md {
+    box-shadow: 
+      0 2px 8px hsl(60 4% 17% / 0.08),
+      0 1px 2px hsl(60 4% 17% / 0.04);
+  }
+  
+  .shadow-soft-lg {
+    box-shadow: 
+      0 4px 16px hsl(60 4% 17% / 0.08),
+      0 1px 4px hsl(60 4% 17% / 0.04);
+  }
+
+  .shadow-soft-xl {
+    box-shadow: 
+      0 8px 24px hsl(60 4% 17% / 0.12),
+      0 2px 6px hsl(60 4% 17% / 0.08);
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-all duration-200;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 2px 8px hsl(60 4% 17% / 0.08), 0 1px 2px hsl(60 4% 17% / 0.04);
+  }
+
+  /* Brand gradients */
+  .gradient-sage {
+    background: linear-gradient(135deg, hsl(120 14% 54%) 0%, hsl(120 20% 45%) 100%);
+  }
+
+  .gradient-warm {
+    background: linear-gradient(135deg, hsl(20 51% 63%) 0%, hsl(30 55% 55%) 100%);
+  }
+
+  /* Status backgrounds */
+  .bg-success-subtle {
+    background-color: hsl(var(--success-light));
+  }
+  
+  .bg-warning-subtle {
+    background-color: hsl(var(--warning-light));
+  }
+  
+  .bg-error-subtle {
+    background-color: hsl(var(--error-light));
+  }
+
+  /* Touch-friendly sizing */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
+/* ============================================
+   COMPONENT OVERRIDES
+   ============================================ */
+
+@layer components {
+  /* Card hover states */
+  .card-interactive {
+    @apply transition-all duration-200 cursor-pointer;
+  }
+  
+  .card-interactive:hover {
+    border-color: hsl(var(--border) / 0.8);
+    @apply -translate-y-0.5;
+    box-shadow: 0 2px 8px hsl(60 4% 17% / 0.08), 0 1px 2px hsl(60 4% 17% / 0.04);
+  }
+
+  /* Stat card styling */
+  .stat-card {
+    background-color: hsl(var(--card));
+    @apply rounded-xl border p-4;
+    box-shadow: 0 1px 2px hsl(60 4% 17% / 0.04);
+  }
+
+  /* Progress ring styling */
+  .progress-ring {
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  /* Bottom navigation safe area */
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  /* Page container */
+  .page-container {
+    @apply container mx-auto px-4 py-6 pb-24;
+  }
+
+  /* Section spacing */
+  .section-gap {
+    @apply space-y-6;
+  }
+
+  /* Form field spacing */
+  .form-gap {
+    @apply space-y-4;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: slide-up 0.3s ease-out backwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
