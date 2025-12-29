@@ -4,14 +4,6 @@ import { useRecipeStore } from '@/stores/recipeStore'
 import { RecipeCategory } from '@/types'
 import { cn } from '@/lib/utils'
 
-// Brand colors
-const brandColors = {
-  sage: '#7a9b7a',
-  sageDark: '#6b8a6b',
-  sageLight: '#e8f0e8',
-  sageMuted: '#d4e4d4',
-}
-
 const categories = [
   { value: 'all' as const, label: 'All Recipes' },
   { value: RecipeCategory.BREAKFAST, label: 'Breakfast' },
@@ -24,21 +16,21 @@ const filterTags = ['high-protein', 'high-carb', 'quick', 'vegetarian']
 
 function RecipeCardSkeleton() {
   return (
-    <div className="bg-white rounded-xl border border-[#e3e1d6] overflow-hidden animate-pulse">
-      <div className="h-44" style={{ backgroundColor: brandColors.sageLight }} />
+    <div className="bg-white rounded-xl border border-border overflow-hidden animate-pulse">
+      <div className="h-44 bg-brand-sage-light" />
       <div className="p-5">
-        <div className="h-6 bg-[#edeae0] rounded w-3/4 mb-4" />
-        <div className="h-4 bg-[#edeae0] rounded w-1/2 mb-3" />
-        <div className="h-3 bg-[#edeae0] rounded w-2/3 mb-4" />
+        <div className="h-6 bg-muted rounded w-3/4 mb-4" />
+        <div className="h-4 bg-muted rounded w-1/2 mb-3" />
+        <div className="h-3 bg-muted rounded w-2/3 mb-4" />
         <div className="flex gap-2 mb-4">
-          <div className="h-7 bg-[#edeae0] rounded-full w-20" />
-          <div className="h-7 bg-[#edeae0] rounded-full w-24" />
+          <div className="h-7 bg-muted rounded-full w-20" />
+          <div className="h-7 bg-muted rounded-full w-24" />
         </div>
-        <div className="pt-4 border-t border-[#e3e1d6]">
+        <div className="pt-4 border-t border-border">
           <div className="grid grid-cols-3 gap-3">
-            <div className="h-12 bg-[#edeae0] rounded" />
-            <div className="h-12 bg-[#edeae0] rounded" />
-            <div className="h-12 bg-[#edeae0] rounded" />
+            <div className="h-12 bg-muted rounded" />
+            <div className="h-12 bg-muted rounded" />
+            <div className="h-12 bg-muted rounded" />
           </div>
         </div>
       </div>
@@ -49,23 +41,18 @@ function RecipeCardSkeleton() {
 function EmptyState({ onClear }: { onClear: () => void }) {
   return (
     <div className="text-center py-20">
-      <div 
-        className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6"
-        style={{ backgroundColor: brandColors.sageLight }}
+      <div
+        className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 bg-brand-sage-light"
       >
-        <Search className="w-10 h-10" style={{ color: brandColors.sage }} />
+        <Search className="w-10 h-10 text-brand-sage" />
       </div>
-      <h3 className="text-xl font-semibold text-[#2d2d2a] mb-2">No recipes found</h3>
-      <p className="text-[#5f5f57] mb-8 max-w-md mx-auto">
+      <h3 className="text-xl font-semibold text-foreground mb-2">No recipes found</h3>
+      <p className="text-muted-foreground mb-8 max-w-md mx-auto">
         We couldn't find any recipes matching your search and filters. Try adjusting your criteria.
       </p>
       <button
         onClick={onClear}
-        className="px-6 py-2.5 rounded-lg font-medium transition-all"
-        style={{ 
-          backgroundColor: brandColors.sage, 
-          color: 'white',
-        }}
+        className="px-6 py-2.5 rounded-lg font-medium transition-all bg-brand-sage text-white"
       >
         Clear all filters
       </button>
@@ -96,20 +83,16 @@ function RecipeCard({ recipe, onClick }: RecipeCardProps) {
   return (
     <div
       onClick={onClick}
-      className="bg-white rounded-xl border border-[#e3e1d6] cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden"
+      className="bg-white rounded-xl border border-border cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden"
     >
       {/* Recipe Image Placeholder - Sage gradient */}
-      <div 
-        className="h-44 flex items-center justify-center"
-        style={{ 
-          background: `linear-gradient(135deg, ${brandColors.sageLight} 0%, ${brandColors.sageMuted} 100%)` 
-        }}
+      <div
+        className="h-44 flex items-center justify-center bg-gradient-to-br from-brand-sage-light to-brand-sage-muted"
       >
-        <svg 
-          className="w-16 h-16" 
-          style={{ color: brandColors.sage, opacity: 0.6 }}
-          fill="none" 
-          stroke="currentColor" 
+        <svg
+          className="w-16 h-16 text-brand-sage opacity-60"
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
@@ -119,27 +102,27 @@ function RecipeCard({ recipe, onClick }: RecipeCardProps) {
       <div className="p-5">
         {/* Header */}
         <div className="flex justify-between items-start gap-3 mb-3">
-          <h3 className="text-lg font-semibold text-[#2d2d2a] leading-tight">{recipe.name}</h3>
-          <span className="shrink-0 px-3 py-1 rounded-lg text-xs font-medium capitalize bg-[#f5f3ec] text-[#5f5f57] border border-[#e3e1d6]">
+          <h3 className="text-lg font-semibold text-foreground leading-tight">{recipe.name}</h3>
+          <span className="shrink-0 px-3 py-1 rounded-lg text-xs font-medium capitalize bg-brand-cream text-muted-foreground border border-border">
             {recipe.category}
           </span>
         </div>
 
         {/* Nutrition Summary */}
         <div className="flex items-center gap-3 text-sm mb-3">
-          <span className="font-semibold text-[#2d2d2a]">{recipe.caloriesPerServing} cal</span>
-          <span className="text-[#8c8b82]">•</span>
-          <span className="text-[#5f5f57]">{recipe.proteinPerServing}g protein</span>
+          <span className="font-semibold text-foreground">{recipe.caloriesPerServing} cal</span>
+          <span className="text-muted-foreground/60">•</span>
+          <span className="text-muted-foreground">{recipe.proteinPerServing}g protein</span>
         </div>
 
         {/* Time & Servings */}
-        <div className="flex items-center gap-4 text-sm text-[#5f5f57] mb-4">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
           <div className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-[#8c8b82]" />
+            <Clock className="w-4 h-4 text-muted-foreground/60" />
             <span>{totalTime} min</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-[#8c8b82]" />
+            <Users className="w-4 h-4 text-muted-foreground/60" />
             <span>{recipe.servings} serving{recipe.servings > 1 ? 's' : ''}</span>
           </div>
         </div>
@@ -150,7 +133,7 @@ function RecipeCard({ recipe, onClick }: RecipeCardProps) {
             {recipe.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#e3e1d6] text-[#5f5f57] bg-[#fdfcf8] capitalize"
+                className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-muted-foreground bg-brand-paper capitalize"
               >
                 {tag.replace(/-/g, ' ')}
               </span>
@@ -159,19 +142,19 @@ function RecipeCard({ recipe, onClick }: RecipeCardProps) {
         )}
 
         {/* Macro Distribution */}
-        <div className="pt-4 border-t border-[#e3e1d6]">
+        <div className="pt-4 border-t border-border">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-xs text-[#8c8b82] mb-1">Protein</div>
-              <div className="text-base font-semibold text-[#2d2d2a]">{recipe.proteinPerServing}g</div>
+              <div className="text-xs text-muted-foreground/60 mb-1">Protein</div>
+              <div className="text-base font-semibold text-foreground">{recipe.proteinPerServing}g</div>
             </div>
             <div>
-              <div className="text-xs text-[#8c8b82] mb-1">Carbs</div>
-              <div className="text-base font-semibold text-[#2d2d2a]">{recipe.carbsPerServing}g</div>
+              <div className="text-xs text-muted-foreground/60 mb-1">Carbs</div>
+              <div className="text-base font-semibold text-foreground">{recipe.carbsPerServing}g</div>
             </div>
             <div>
-              <div className="text-xs text-[#8c8b82] mb-1">Fat</div>
-              <div className="text-base font-semibold text-[#2d2d2a]">{recipe.fatPerServing}g</div>
+              <div className="text-xs text-muted-foreground/60 mb-1">Fat</div>
+              <div className="text-base font-semibold text-foreground">{recipe.fatPerServing}g</div>
             </div>
           </div>
         </div>
@@ -195,19 +178,18 @@ export default function Recipes() {
   const hasActiveFilters = searchQuery || selectedCategory !== 'all' || selectedTags.length > 0
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#fdfcf8' }}>
+    <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
         <div className="flex items-start justify-between mb-8">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#2d2d2a] mb-1">Recipes</h1>
-            <p className="text-[#5f5f57]">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Recipes</h1>
+            <p className="text-muted-foreground">
               {isLoading ? 'Loading...' : `${filteredRecipes.length} recipes available`}
             </p>
           </div>
           <button
-            className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-white transition-all hover:opacity-90"
-            style={{ backgroundColor: brandColors.sage }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-white transition-all hover:opacity-90 bg-brand-sage"
             onClick={() => console.log('Add recipe')}
           >
             <Plus className="w-5 h-5" />
@@ -217,14 +199,13 @@ export default function Recipes() {
 
         {/* Search Bar */}
         <div className="relative mb-6">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8c8b82]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/60" />
           <input
             type="text"
             placeholder="Search recipes by name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3.5 bg-white border border-[#e3e1d6] rounded-xl text-[#2d2d2a] placeholder:text-[#8c8b82] focus:outline-none focus:ring-2 focus:border-transparent transition-all"
-            style={{ '--tw-ring-color': `${brandColors.sage}33` } as React.CSSProperties}
+            className="w-full pl-12 pr-4 py-3.5 bg-white border border-border rounded-xl text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-brand-sage/20 focus:border-transparent transition-all"
           />
         </div>
 
@@ -238,11 +219,10 @@ export default function Recipes() {
                 onClick={() => setCategory(cat.value)}
                 className={cn(
                   'px-5 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all',
-                  isActive 
-                    ? 'text-white shadow-sm' 
-                    : 'bg-white border border-[#e3e1d6] text-[#5f5f57] hover:bg-[#f5f3ec] hover:text-[#2d2d2a]'
+                  isActive
+                    ? 'bg-brand-sage text-white shadow-sm'
+                    : 'bg-white border border-border text-muted-foreground hover:bg-brand-cream hover:text-foreground'
                 )}
-                style={isActive ? { backgroundColor: brandColors.sage } : undefined}
               >
                 {cat.label}
               </button>
@@ -251,8 +231,8 @@ export default function Recipes() {
         </div>
 
         {/* Tag Filters */}
-        <div className="flex items-center gap-4 mb-8 pb-6 border-b border-[#e3e1d6]">
-          <span className="text-xs font-semibold text-[#8c8b82] uppercase tracking-wider">Filter by:</span>
+        <div className="flex items-center gap-4 mb-8 pb-6 border-b border-border">
+          <span className="text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Filter by:</span>
           <div className="flex flex-wrap gap-2">
             {filterTags.map((tag) => {
               const isActive = selectedTags.includes(tag)
@@ -263,10 +243,9 @@ export default function Recipes() {
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium capitalize transition-all',
                     isActive
-                      ? 'text-white'
-                      : 'bg-white border border-[#e3e1d6] text-[#5f5f57] hover:bg-[#f5f3ec]'
+                      ? 'bg-brand-sage text-white'
+                      : 'bg-white border border-border text-muted-foreground hover:bg-brand-cream'
                   )}
-                  style={isActive ? { backgroundColor: brandColors.sage } : undefined}
                 >
                   {tag.replace(/-/g, ' ')}
                 </button>
@@ -276,8 +255,7 @@ export default function Recipes() {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="ml-auto text-sm font-medium transition-colors hover:opacity-80"
-              style={{ color: brandColors.sage }}
+              className="ml-auto text-sm font-medium transition-colors hover:opacity-80 text-brand-sage"
             >
               Clear all
             </button>

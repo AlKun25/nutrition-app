@@ -1,5 +1,16 @@
 import type { Config } from 'tailwindcss'
 
+/* ============================================
+   ⚠️  DEPRECATED IN TAILWIND V4
+
+   This config file is NO LONGER USED in Tailwind v4.
+   All customizations should be done in src/index.css using:
+   - :root for color values
+   - @theme inline for Tailwind utilities
+
+   This file is kept for reference only and can be deleted.
+   ============================================ */
+
 const config: Config = {
   darkMode: 'class',
   content: [
@@ -70,6 +81,7 @@ const config: Config = {
           sage: {
             DEFAULT: '#7a9b7a',
             light: '#e8f0e8',
+            muted: '#d4e4d4',
             dark: '#6b8a6b',
             subtle: '#f4f8f4',
           },

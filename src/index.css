@@ -3,14 +3,17 @@
 /* ============================================
    NUTRITION APP BRAND SYSTEM
    Paper-inspired, minimalist design language
+
+   SINGLE SOURCE OF TRUTH
+   - All color values defined in :root
+   - @theme inline references these for Tailwind utilities
+   - Change colors once, updates everywhere
    ============================================ */
 
 :root {
-    /* === BACKGROUND COLORS (Paper Tones) === */
+    /* === SEMANTIC COLORS (Shadcn/UI - HSL format for alpha support) === */
     --background: 39 33% 99%;        /* #fdfcf8 - Warm white (aged paper) */
     --foreground: 60 4% 17%;         /* #2d2d2a - Almost black */
-
-    /* === CARD/SURFACE COLORS === */
     --card: 0 0% 100%;               /* #ffffff - Pure white (elevated) */
     --card-foreground: 60 4% 17%;    /* #2d2d2a */
     
@@ -62,16 +65,30 @@
     --sidebar-border: 43 18% 86%;
     --sidebar-ring: 120 14% 54%;
 
-    /* === CUSTOM BRAND TOKENS === */
-    --brand-paper: 39 33% 99%;
-    --brand-cream: 40 25% 95%;
-    --brand-tan: 43 25% 91%;
-    --brand-sage: 120 14% 54%;
-    --brand-sage-light: 120 20% 94%;
-    --brand-terracotta: 20 51% 63%;
-    --brand-terracotta-light: 20 40% 95%;
-    --brand-blue: 206 24% 54%;
-    --brand-blue-light: 206 30% 94%;
+    /* === BRAND COLORS (Hex format for Tailwind utilities) === */
+    /* Paper tones */
+    --brand-paper-hex: #fdfcf8;
+    --brand-cream-hex: #f5f3ec;
+    --brand-tan-hex: #edeae0;
+
+    /* Sage green variants */
+    --brand-sage-hex: #7a9b7a;
+    --brand-sage-light-hex: #e8f0e8;
+    --brand-sage-muted-hex: #d4e4d4;
+    --brand-sage-dark-hex: #6b8a6b;
+    --brand-sage-subtle-hex: #f4f8f4;
+
+    /* Terracotta variants */
+    --brand-terracotta-hex: #d4906f;
+    --brand-terracotta-light-hex: #f9ede7;
+    --brand-terracotta-dark-hex: #c37d5c;
+    --brand-terracotta-subtle-hex: #fdf7f4;
+
+    /* Blue variants */
+    --brand-blue-hex: #6b8fa8;
+    --brand-blue-light-hex: #e7eff4;
+    --brand-blue-dark-hex: #5a7d94;
+    --brand-blue-subtle-hex: #f3f7fa;
 
     /* === SEMANTIC COLORS === */
     --success: 120 20% 52%;
@@ -109,6 +126,37 @@
     --border: 40 10% 20%;
     --input: 40 10% 20%;
     --ring: 120 20% 60%;
+}
+
+/* ============================================
+   TAILWIND UTILITY GENERATION
+   Tell Tailwind to create utilities from our brand colors
+   ============================================ */
+
+@theme inline {
+    /* Brand colors - Paper tones */
+    --color-brand-paper: var(--brand-paper-hex);
+    --color-brand-cream: var(--brand-cream-hex);
+    --color-brand-tan: var(--brand-tan-hex);
+
+    /* Brand colors - Sage green */
+    --color-brand-sage: var(--brand-sage-hex);
+    --color-brand-sage-light: var(--brand-sage-light-hex);
+    --color-brand-sage-muted: var(--brand-sage-muted-hex);
+    --color-brand-sage-dark: var(--brand-sage-dark-hex);
+    --color-brand-sage-subtle: var(--brand-sage-subtle-hex);
+
+    /* Brand colors - Terracotta */
+    --color-brand-terracotta: var(--brand-terracotta-hex);
+    --color-brand-terracotta-light: var(--brand-terracotta-light-hex);
+    --color-brand-terracotta-dark: var(--brand-terracotta-dark-hex);
+    --color-brand-terracotta-subtle: var(--brand-terracotta-subtle-hex);
+
+    /* Brand colors - Blue */
+    --color-brand-blue: var(--brand-blue-hex);
+    --color-brand-blue-light: var(--brand-blue-light-hex);
+    --color-brand-blue-dark: var(--brand-blue-dark-hex);
+    --color-brand-blue-subtle: var(--brand-blue-subtle-hex);
 }
 
 /* ============================================
