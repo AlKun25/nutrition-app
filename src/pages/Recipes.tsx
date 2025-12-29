@@ -1,4 +1,5 @@
 import { Search, Clock, Users, Plus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useRecipes } from '@/hooks/useRecipes'
 import { useRecipeStore } from '@/stores/recipeStore'
 import { RecipeCategory } from '@/types'
@@ -164,6 +165,7 @@ function RecipeCard({ recipe, onClick }: RecipeCardProps) {
 }
 
 export default function Recipes() {
+  const navigate = useNavigate()
   const { filteredRecipes, isLoading } = useRecipes()
   const {
     searchQuery,
@@ -283,7 +285,7 @@ export default function Recipes() {
               <RecipeCard
                 key={recipe.id}
                 recipe={recipe}
-                onClick={() => console.log('Navigate to recipe:', recipe.name)}
+                onClick={() => navigate(`/recipes/${recipe.id}`)}
               />
             ))}
           </div>

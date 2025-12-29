@@ -337,13 +337,24 @@
 }
 
 @keyframes slide-up {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(10px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -366,6 +377,10 @@
   animation: slide-up 0.3s ease-out;
 }
 
+.animate-slide-in {
+  animation: slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .animate-scale-in {
   animation: scale-in 0.2s ease-out;
 }
@@ -381,3 +396,33 @@
 .stagger-children > *:nth-child(4) { animation-delay: 150ms; }
 .stagger-children > *:nth-child(5) { animation-delay: 200ms; }
 .stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+/* Step number gradient (for recipe instructions) */
+.step-number {
+  background: linear-gradient(135deg, #7a9b7a 0%, #6b8fa8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Print styles */
+.print-hidden {
+  display: block;
+}
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  .recipe-content {
+    max-width: 100% !important;
+  }
+
+  /* Ensure good print layout */
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-slide-up {
+    animation: none !important;
+  }
+}

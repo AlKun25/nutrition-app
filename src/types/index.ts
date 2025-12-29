@@ -96,6 +96,7 @@ export interface Recipe {
   ingredients: Ingredient[]
   instructions: string[]
   tags: string[]
+  tips?: string
 
   // Calculated per serving
   caloriesPerServing: number
