@@ -67,7 +67,6 @@ export default function RecipeDetail() {
   if (recipe === undefined) return <LoadingState />
   if (!recipe) return <NotFoundState />
 
-  const totalTime = recipe.prepTime + recipe.cookTime
   const totalMacros = recipe.proteinPerServing + recipe.carbsPerServing + recipe.fatPerServing
   const proteinPercent = (recipe.proteinPerServing / totalMacros) * 100
   const carbsPercent = (recipe.carbsPerServing / totalMacros) * 100
@@ -329,12 +328,13 @@ export default function RecipeDetail() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="border-2 border-border hover:bg-brand-cream">
+            <AlertDialogCancel className="bg-white border-2 border-border hover:bg-brand-cream">
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
-              className="!bg-destructive !text-destructive-foreground hover:!bg-destructive/90"
+              className="text-white hover:opacity-90"
+              style={{ backgroundColor: '#c77070' }}
             >
               Delete Recipe
             </AlertDialogAction>
