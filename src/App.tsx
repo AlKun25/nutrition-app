@@ -3,6 +3,8 @@ import { Toaster } from 'sonner'
 import { Layout } from './components/Layout'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
+import ProfileSetup from './pages/ProfileSetup'
+import GoalSetting from './pages/GoalSetting'
 import Recipes from './pages/Recipes'
 import RecipeDetail from './pages/RecipeDetail'
 import Pantry from './pages/Pantry'
@@ -18,6 +20,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="profile-setup" element={<ProfileSetup />} />
+            <Route path="profile-setup/goals" element={<GoalSetting />} />
             <Route path="recipes" element={<Recipes />} />
             <Route path="recipes/:recipeId" element={<RecipeDetail />} />
             <Route path="pantry" element={<Pantry />} />
