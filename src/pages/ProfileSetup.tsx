@@ -217,7 +217,7 @@ export default function ProfileSetup() {
                     />
                   ) : (
                     <div>
-                      <FormLabel>Height (ft/in)</FormLabel>
+                      <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Height (ft/in)</label>
                       <div className="grid grid-cols-2 gap-3 mt-2">
                         <FormField
                           control={form.control}
@@ -324,7 +324,7 @@ export default function ProfileSetup() {
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent>
+                        <SelectContent className="bg-white">
                           <SelectItem value={Gender.MALE}>Male</SelectItem>
                           <SelectItem value={Gender.FEMALE}>Female</SelectItem>
                           <SelectItem value={Gender.OTHER}>Other</SelectItem>
@@ -348,7 +348,7 @@ export default function ProfileSetup() {
                             <SelectValue placeholder="Select activity level" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent>
+                        <SelectContent className="bg-white">
                           <SelectItem value={ActivityLevel.SEDENTARY}>
                             Sedentary (little/no exercise)
                           </SelectItem>
